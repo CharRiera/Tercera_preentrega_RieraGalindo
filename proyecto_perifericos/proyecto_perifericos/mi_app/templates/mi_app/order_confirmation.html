@@ -1,0 +1,17 @@
+{% extends 'mi_app/base.html' %}
+
+{% load static %}
+
+{% block title %} Confirmacion de pedido {% endblock title %}
+
+{% block main %}
+    <h2>Pedido Confirmado</h2>
+    <p>Pedido #: {{ order.id }}</p>
+    <p>Cliente: {{ order.customer }}</p>
+    <h3>Productos</h3>
+    <ul>
+        {% for item in order_items %}
+            <li>{{ item.product.nombre }} - Cantidad: {{ item.quantity }}</li>
+        {% endfor %}
+    </ul>
+{% endblock main %}

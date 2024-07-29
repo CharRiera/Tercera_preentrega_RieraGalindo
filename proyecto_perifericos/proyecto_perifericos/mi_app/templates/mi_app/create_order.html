@@ -1,0 +1,75 @@
+{% extends 'mi_app/base.html' %}
+
+{% load static %}
+
+{% block title %} Crear pedido {% endblock title %}
+
+{% block main %}
+    <h2>Formulario de Pedido</h2>
+    <form method="post" id="order-form">
+        {% csrf_token %}
+        
+        <h3>Seleccionar Cliente Existente</h3>
+        {{ existing_customer_form.as_p }}
+
+        <h3>O Crear Nuevo Cliente</h3>
+        <div id="new-customer-form">
+            {{ new_customer_form.as_p }}
+        </div>
+        
+        <h3>Agregar Productos</h3>
+        <div id="order-items-container">
+            <div class="order-item-form">
+                <select name="product" class="form-control" required>
+                    <option value="">Seleccione un producto</option>
+                    {% for product in products %}
+                        <option value="{{ product.id }}">{{ product.nombre }} - {{ product.marca }}</option>
+                    {% endfor %}
+                </select>
+                <input type="number" name="quantity" min="1" class="form-control" placeholder="Cantidad" required>
+            </div>
+        </div>
+        <button type="button" id="add-item" class="btn btn-secondary">Agregar otro producto</button>
+        <button type="submit" class="btn btn-primary">Crear Pedido</button>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+    </form>
+    
+    <script>
+        document.getElementById('add-item').addEventListener('click', function() {
+            var container = document.getElementById('order-items-container');
+            var newItem = container.children[0].cloneNode(true);
+            container.appendChild(newItem);
+        });
+
+        document.querySelector('[name="customer"]').addEventListener('change', function() {
+            var newCustomerForm = document.getElementById('new-customer-form');
+            if (this.value) {
+                newCustomerForm.style.display = 'none';
+                // Clear and disable the new customer form fields
+                document.querySelectorAll('#new-customer-form input').forEach(function(input) {
+                    input.value = '';
+                    input.disabled = true;
+                });
+            } else {
+                newCustomerForm.style.display = 'block';
+                // Enable the new customer form fields
+                document.querySelectorAll('#new-customer-form input').forEach(function(input) {
+                    input.disabled = false;
+                });
+            }
+        });
+
+        document.getElementById('order-form').addEventListener('submit', function(e) {
+            var customerSelected = document.querySelector('[name="customer"]').value;
+            var newCustomerFields = document.querySelectorAll('#new-customer-form input:not([type="hidden"])');
+            var newCustomerFilled = Array.from(newCustomerFields).every(input => input.value.trim() !== '');
+
+            if (!customerSelected && !newCustomerFilled) {
+                e.preventDefault();
+                alert('Por favor, seleccione un cliente existente o complete todos los campos para crear uno nuevo.');
+            }
+        });
+    </script>
+{% endblock main %}

@@ -1,0 +1,70 @@
+{% extends 'mi_app/base.html' %}
+
+{% load static %}
+
+{% block title %} Inicio {% endblock title %}
+
+{% block main %}
+
+<!-- Content section 1 -->
+<section class="zoom-section" id="scroll">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'mi_app/assets/img/01.jpg' %}" alt="..." /></div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <h2 class="display-4">Lorem ipsum dolor sit amet.</h2>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut excepturi quas alias? Molestiae rem nisi laboriosam veniam praesentium blanditiis corrupti reiciendis, harum amet nostrum ad repellendus aut quibusdam quam architecto?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content section 2 -->
+<section class="zoom-section">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'mi_app/assets/img/02.jpg' %}" alt="..." /></div>
+            </div>
+            <div class="col-lg-6">
+                <div class="p-5">
+                    <h2 class="display-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, ullam?</h2>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut temporibus facere laborum illum et alias sint repellat optio amet, id praesentium. Quam consequatur animi iure itaque id dolorem enim delectus.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Content section 3 -->
+<section class="zoom-section">
+    <div class="container px-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <div class="p-5"><img class="img-fluid rounded-circle" src="{% static 'mi_app/assets/img/03.jpg' %}" alt="..." /></div>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <div class="p-5">
+                    <h2 class="display-4">Lorem, ipsum dolor.</h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio ex nisi, dolore molestias id harum error, autem sequi quae voluptatibus culpa quisquam tenetur quia molestiae tempore. Error veniam magnam expedita?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .zoom-section {
+        transition: transform 0.5s ease;
+    }
+
+    .zoom-section:hover {
+        transform: scale(1.03);
+    }
+</style>
+
+{% endblock main %}
